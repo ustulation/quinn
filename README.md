@@ -24,6 +24,19 @@ any other feedback to the [issue tracker][issues].
 
 Quinn was created and is maintained by Dirkjan Ochtman and Benjamin Saunders.
 
+## About QUIC
+
+QUIC is a state-of-the-art, secure, general-purpose transport protocol suitable
+for applications as diverse as bulk data transfer and real-time games. A QUIC
+connection consists of many concurrent uni- and bi-directional streams. Streams
+are disposable and free to construct, making an effective framing mechanism for
+everything from multi-gigabyte file transfers to high-frequency messages
+consisting of a handful of bytes each. The contents of each stream is delivered
+reliably, but may be abandoned by either peer at any time. Streams are not
+ordered with regard to each other, allowing applications to achieve
+uncompromising low latency while still supporting efficient exchange of bulk
+data, even concurrently on the same connection.
+
 ## Features
 
 * Simultaneous client/server operation
