@@ -212,6 +212,7 @@ pub struct Transmit {
 // Useful internal constants
 //
 
+const LOC_CID_COUNT: usize = 8;
 const RESET_TOKEN_SIZE: usize = 16;
 const MAX_CID_SIZE: usize = 18;
 const MIN_CID_SIZE: usize = 4;
