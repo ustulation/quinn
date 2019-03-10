@@ -515,7 +515,7 @@ impl Connection {
         self.space_mut(space).pending_acks.subtract(&info.acks);
     }
 
-    pub fn timeout(&mut self, now: Instant, timer: Timer) {
+    fn timeout(&mut self, now: Instant, timer: Timer) {
         match timer {
             Timer::Close => {
                 self.state = State::Drained;
@@ -1010,6 +1010,7 @@ impl Connection {
                     }
                 });
             }
+            Timer(now, timer) => self.timeout(now, timer),
         }
     }
 
@@ -3238,6 +3239,7 @@ const MAX_ACK_BLOCKS: usize = 64;
 /// Events to be sent to the Connection
 pub enum ConnectionEvent {
     NewIdentifiers([Option<(u64, ConnectionId)>; LOC_CID_COUNT]),
+    Timer(Instant, Timer),
 }
 
 /// Events to be sent to the Endpoint

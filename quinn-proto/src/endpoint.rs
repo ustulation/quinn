@@ -645,11 +645,15 @@ impl Endpoint {
 
     /// Handle a timer expiring
     pub fn timeout(&mut self, now: Instant, ch: ConnectionHandle, timer: Timer) {
-        self.connections[ch].conn.timeout(now, timer);
+        self.connections[ch]
+            .conn
+            .handle_event(ConnectionEvent::Timer(now, timer));
         if self.connections[ch].app_closed {
             self.forget(ch);
             return;
         }
+
+        self.endpoint_eventful_conns.insert(ch);
         self.dirty_timers.insert(ch);
         match timer {
             Timer::LossDetection | Timer::KeepAlive => {
